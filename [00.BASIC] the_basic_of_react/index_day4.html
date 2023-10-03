@@ -1,0 +1,155 @@
+//4.0
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    //() => argument
+    //어떤 prop이든 btn 컴포넌트에 보내면 그것들은 btn 함수의 첫 번째 argument(인자) 속으로 들어감!
+    //props는 btn이 전달 받는 첫 번째이자 유일한 인자
+    function Btn({text}) {
+      return (
+        <button
+          style={{
+            backgroundColor: "blue",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius : 10,
+          }}
+        >
+          {text}
+        </button>
+      )
+    }
+
+    function App() {
+      return (
+        <div>
+          <Btn text="Save Changes!" />
+          <Btn text="Continue" />
+        </div>
+        );
+      }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+    //🕊️ 중요 🕊️
+  </script>
+</html>
+
+
+//4.1
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel">
+    //() => argument
+    //어떤 prop이든 btn 컴포넌트에 보내면 그것들은 btn 함수의 첫 번째 argument(인자) 속으로 들어감!
+    //props는 btn이 전달 받는 첫 번째이자 유일한 인자
+    function Btn({text, changeValue}) {
+      return (
+        <button
+          onClick={changeValue}
+          style={{
+            backgroundColor: "blue",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius : 10,
+          }}
+        >
+          {text}
+        </button>
+      )
+    }
+
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
+      return (
+        <div>
+          // 여기서의 onClick(changeValue)은 btn 컴포넌트에 들어가는 하나의 prop
+          <Btn text={value} changeValue={changeValue} /> 
+          <Btn text="Continue" />
+        </div>
+        );
+      }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+
+
+    //🕊️ 중요 🕊️
+
+
+
+  </script>
+</html>
+
+//4.2
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  
+  <script type="text/babel">
+    //() => argument
+    //어떤 prop이든 btn 컴포넌트에 보내면 그것들은 btn 함수의 첫 번째 argument(인자) 속으로 들어감!
+    //props는 btn이 전달 받는 첫 번째이자 유일한 인자
+    function Btn({text, fontSize = 14}) {
+      return (
+        <button
+          style={{
+            backgroundColor: "blue",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius : 10,
+            fontSize,
+          }}
+        >
+          {text}
+        </button>
+      )
+    }
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    }
+    function App() {
+      return (
+        <div>
+          // 여기서의 onClick(changeValue)은 btn 컴포넌트에 들어가는 하나의 prop
+          <Btn text="Save Changes" fontSize={18} /> 
+          <Btn text={"Continue"}/>
+        </div>
+        );
+      }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+
+
+    //🕊️ 중요 🕊️
+
+
+
+  </script>
+</html>

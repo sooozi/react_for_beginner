@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  
+  <script type="text/babel">
+    //prop을 항상 이곳에 추가해줘야함!
+    function Btn({ text, changeValue }) {
+      return (
+        <button 
+          onClick={changeValue}
+          style={{
+          backgroundColor: "orange",
+          color: "white",
+          padding: "10px",
+          border: 0,
+          borderRadius: "10px",
+          fontSize: 16,
+        }}>
+          {text}
+        </button>
+      );
+    }
+    const MemorizedBtn = React.memo(Btn);
+    //🕊️ 리액트 메모
+    //부모에 어떤 state라도 변경이 있으면 모든 자식들은 re-render된다.
+    //이를 통해 어플리케이션이 느려질 수 있다.
+    //하지만 리액트 메모를 사용하면 렌더링을 컨트롤할 수 있다.
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Change");
+      return (
+        <div>
+          {/*이곳에 들어가는 onClick은 이벤트리스너가 아니고 props이다!!!*/}
+          <MemorizedBtn text={value} changeValue={changeValue}/>
+          <Btn text="Continue" />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+  </script>
+</html>

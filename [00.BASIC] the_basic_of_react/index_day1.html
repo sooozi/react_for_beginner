@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    //************jsx를 이용한 리액트 방식
+    const Tit = () => (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        안녕, 나는 h3!
+      </h3>
+    );
+    const Button = () => <button onClick={() => console.log("hi!")}>click me!</button>;
+
+    const Container = () => (//컴포넌트 안에 컴포넌트 넣기<!-- 컴포넌트의 첫 글자는 반드시 대문자여야 함! --> 
+      <div>
+        <Tit />
+        <Button />
+      </div>
+    );
+    ReactDOM.render(<Container/>, root);
+
+    //************리액트 예전 방식
+    // span과 button 생성
+    // const h3 = React.createElement("h3",{
+    //   //자바스크립트에서는 event, 리액트에서는 on!!!
+    //   onMouseEnter: () => console.log("mouse enter"),
+    //  },
+    //   "안녕, 나는 h3!"
+    // ); //span의 argument도 쓸 수 있음
+
+    // const btn = React.createElement("button", { //첫 번째 argument
+    //   onClick: () => console.log("hi!"),//두 번째 argument => props
+    // }, "click me!");//세 번째 argument => content
+
+    //const container = React.createElement("div", null, [tit, button]); //프로퍼티 null
+
+    // body 안에 react element 가져다 두기
+    //ReactDOM.render(container, root); //span을 root안에 랜더해죠~
+  </script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel">
+    //<---- 리랜더링하는 좋은 방법 ---->
+    const root = document.getElementById("root");
+    function App() { 
+      //state 첫 번째 부분
+      const [counter, setCounter] = React.useState(0); //default값 0
+      const onClick = () => {
+        //setCounter(counter + 1);//자동으로 리렌더링됨 하지만 안전하지 않은 방법
+        setCounter((current) => current + 1); //current는 현재값이라는 것을 리액트에서 알기 때문에 더 안전한 방법 (현재 state를 기반으로 계산하고 싶다면 함수를 이용하는 것이 옳은 방법!!!! )
+      };
+
+      //console.log(date);//배열의 첫번째 값은 초기값, 두번째 요소는 값을 바꾸는 함수
+      return (
+        <div>
+          <h3>total clicks: {counter}</h3>
+          <button onClick={onClick}>click me!</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+
+
+    //<---- 안 좋은 방법 ---->
+    // const root = document.getElementById("root");
+    // let counter = 0;
+    // function countUp (){
+    //   counter = counter + 1;
+    //   render();
+    // }
+    // function render () {
+    //   ReactDOM.render(<Container/>, root); //ui도 새롭게 렌더
+    // }
+
+    // const Container = () => (//(함수)컴포넌트 안에 컴포넌트 넣기<!-- 컴포넌트의 첫 글자는 반드시 대문자여야 함! --> 
+    //   <div>
+    //     <h3>total clicks: {counter}</h3>
+    //     <button onClick={countUp}>click me!</button>
+    //   </div>
+    // );
+    // ReactDOM.render(<Container/>, root);
+
+
+    //🕊️ 중요 🕊️
+    //바닐라 js => 버튼 클릭 > body, 해당 태그 모두 업데이트
+    //리액트 => 버튼 클릭 > 바뀌는 부분만 업데이트(리액트는 다른 부분만 캐치하여 그 부분만 바꿔줌!!!!)
+
+    //modifier가 필요한 이유
+
+
+  </script>
+</html>

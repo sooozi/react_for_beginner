@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel">
+    //<---- 분을 시간으로 바꾸어보기 ---->
+    function MinutesToHours() {
+      //state를 처음으로 두개 써본 날!
+      const [amount, setAmount] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset= ()=> setAmount(0);
+      const onflip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+      return (
+        <div>
+          <div>
+            <input
+              //input value로 state 연결
+              value={flipped ? amount * 60 : amount}
+              placeholder="minutes"
+              type="number"
+              onChange={onChange} 
+              disabled={flipped}
+            />
+            </div>
+            <div>
+              <input
+              value={flipped ? amount : Math.round(amount/60)}
+              //flipped 상태면 minutes 그대로를 보여줌
+              placeholder="hours"
+              onChange={onChange}
+              disabled={!flipped}
+            />
+          </div>
+          <button onClick={reset}>reset</button>
+          <button onClick={onflip}>flip</button>
+        </div>
+      );
+    }
+    function kmToMiles() {
+      return <h3>km 2 m</h3>
+    }
+    //<---- 미터를 킬로미터로 바꾸어보기 ---->
+    function App() {
+      const [index, setIndex] = React.useState("0");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      }
+      return (
+        <div>
+          <h1>super converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="0">minutes & hours</option>
+            <option value="1">km & miles</option>
+          </select>
+          
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <kmToMiles /> : null}
+        </div>
+        );
+      }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+
+
+    //🕊️ 중요 🕊️
+    //리액트에서는 for, class는 자바스크립트 용어라 문제가 생길 수 있음
+    //htmlFor, className으로 사용해줘야함
+    //리액트 js에서는 input의 value를 통제할 수 없다
+
+
+  </script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel">
+    //<---- 리랜더링하는 좋은 방법 ---->
+    const root = document.getElementById("root");
+    function App() {
+      //state 첫 번째 부분
+      const [counter, setCounter] = React.useState(0); //default값 0
+      const onClick = () => {
+        //setCounter(counter + 1);//자동으로 리렌더링됨 but 다른 곳에서 변경되면서 우리가 생각했던 값이 아닐 수 있기에 좋은 방법이 아님!
+        setCounter((current) => current + 1); //이전 값을 바탕으로 현재 값을 계산, 더 안전, 현재 state를 기반으로 계산하고 싶다면 함수 사용하기!
+      };
+
+      //console.log(date);//배열의 첫번째 값은 초기값, 두번째 요소는 값을 바꾸는 함수
+      return (
+        <div>
+          <h3>total clicks: {counter}</h3>
+          <button onClick={onClick}>click me!</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+
+
+
+    //🕊️ 중요 🕊️
+
+
+  </script>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel">
+    //<---- 분을 시간으로 바꾸어보기 ---->
+    function App() {
+
+      //state를 처음으로 두개 써본 날!
+      const [amount, setAmount] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+
+      
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset= ()=> setAmount(0);
+      const onflip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+      return (
+        <div>
+          <h1>super converter</h1>
+          <div>
+            <input
+              //input value로 state 연결
+              value={flipped ? amount * 60 :amount}
+              placeholder="minutes"
+              type="number"
+              onChange={onChange} 
+              disabled={flipped}
+            />
+            </div>
+            <div>
+              <input
+              value={flipped ? amount : Math.round(amount/60)}
+              //flipped 상태면 minutes 그대로를 보여줌
+              placeholder="hours"
+              onChange={onChange}
+              disabled={!flipped}
+            />
+          </div>
+          <button onClick={reset}>reset</button>
+          <button onClick={onflip}>flip</button>
+        </div>
+        );
+      }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+
+
+    //🕊️ 중요 🕊️
+    //리액트에서는 for, class는 자바스크립트 용어라 문제가 생길 수 있음
+    //htmlFor, className으로 사용해줘야함
+    //리액트 js에서는 input의 value를 통제할 수 없다
+
+
+  </script>
+</html>

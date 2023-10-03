@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- react와 react-dom import -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  
+  <script type="text/babel">
+    //컴포넌트 : 어떤 JSX를 변환하는 함수 (EX. function App)
+    //argument 인자 : function App 옆에있는 ()
+    function Btn({ banana, big }) {
+      return (
+        <button 
+          style={{
+          backgroundColor: "orange",
+          color: "white",
+          padding: "10px",
+          border: 0,
+          borderRadius: "10px",
+          fontSize: big ? 30 : 16,
+        }}>
+          {banana}
+        </button>
+      );
+    }
+    function App() {
+      return (
+        <div>
+          {/*props = property : banana="Save Changes"*/}
+          <Btn banana="Save Changes" big={true} />
+          <Btn banana="Continue" big={false} />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+  </script>
+</html>
