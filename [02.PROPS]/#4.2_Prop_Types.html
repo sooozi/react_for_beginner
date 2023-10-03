@@ -31,14 +31,14 @@
 
     //리액트 JS가 못하는 prop들의 타입을 확인해줌!!! (콘솔)
     Btn.propTypes = {
-      text: PropTypes.string,
+      text: PropTypes.string.isRequired,
       fontSize: PropTypes.number,
     }
     function App() {
       return (
         <div>
           <Btn text="Save Changes" />
-          <Btn text={14} fontSize={"Continue"} />
+          <Btn fontSize={"Continue"} />
         </div>
       );
     }
