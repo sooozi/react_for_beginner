@@ -1,9 +1,10 @@
-
+import Button from './Button';
 
 function App() {
   return (
     <div className="App">
-      hello
+      <h1>안녕ㅇㅇ</h1>
+      <Button text={'버튼이다'} />
     </div>
   );
 }
