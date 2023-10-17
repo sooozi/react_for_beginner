@@ -1,9 +1,22 @@
-//#7.4 Movie App part Two
-//리액트 앱에서 페이지 전환하는 방법!
+//#7.5 React Router
+//리액트 라우터 사용 방법
+//사이트에서 임포트 가져오기
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Home from "./routes/Home"
 
-//router : url을 보고있는 컴포넌트
 function App() {
-  return null;
+  //라우터 컴포넌트 만들어주기
+  return (<Router>
+    {/* switch는 라우터를 찾아줌 */}
+    <Routes>
+      {/* home으로 가는 라우터 렌더링 */}
+      <Route path="/" element={<Home />} />
+    </Routes>
+  </Router>);
 }
 
 export default App;

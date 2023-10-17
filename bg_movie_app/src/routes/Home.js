@@ -1,7 +1,7 @@
 //#7.4 Movie App part Two
 //리액트 앱에서 페이지 전환하는 방법!
 import { useEffect, useState } from "react";
-import Movie from "./components/Movie";
+import Movie from "../components/Movie";
 
 function Home() {
   const [loading, setLoading] = useState(true);
