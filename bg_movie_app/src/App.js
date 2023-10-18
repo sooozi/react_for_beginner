@@ -7,16 +7,20 @@ import {
   Route,
 } from "react-router-dom";
 import Home from "./routes/Home"
+import Detail from "./routes/Detail"
 
 function App() {
   //라우터 컴포넌트 만들어주기
-  return (<Router>
-    {/* switch는 라우터를 찾아줌 */}
-    <Routes>
-      {/* home으로 가는 라우터 렌더링 */}
-      <Route path="/" element={<Home />} />
-    </Routes>
-  </Router>);
+  return (
+    <Router>
+      {/* switch는 라우터를 찾아줌 */}
+      <Routes>
+        {/* home으로 가는 라우터 렌더링 */}
+        <Route path="/" element={<Home />} />
+        <Route path="/movie" element={<Detail />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
